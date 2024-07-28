@@ -1,0 +1,34 @@
+{
+  "cities": [
+    {
+      "name": "Valencia",
+      "lat": "39.47391",
+      "long": "-0.37966"
+    },
+    {
+      "name": "Barcelona",
+      "lat": "41.3888",
+      "long": "2.159"
+    },
+    {
+      "name": "Madrid",
+      "lat": "40.4165",
+      "long": "-3.7026"
+    },
+    {
+      "name": "Elche",
+      "lat": "38.2622",
+      "long": "-0.7011"
+    },
+    {
+      "name": "Alicante",
+      "lat": "38.3452",
+      "long": "-0.4815"
+    },
+    {
+      "name": "Castellón",
+      "lat": "39.9857",
+      "long": "-0.0493"
+    }
+  ]
+}
