@@ -64,7 +64,7 @@ import { useState } from 'react';
 */
 
 export function WeatherButton({ weatherData, iconImage, ...props }) {
-  const [showHourly, setShowHourly] = useState(false);
+  const [showHourly, setShowHourly] = useState(null);
 
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const d = new Date();
@@ -72,20 +72,30 @@ export function WeatherButton({ weatherData, iconImage, ...props }) {
 
   const formatTime = (timeString) => {
     const date = new Date(timeString);
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return date.toLocaleTimeString([], { hour: '2-digit' });
   };
 
-  const handleDayClick = () => {
-    setShowHourly(!showHourly);
+  const isNight = (hour) => {
+    return hour >= 21 || hour < 7;
   };
+
+  const handleDayClick = (i) => {
+    if (showHourly === i) {
+      setShowHourly(null);
+    } else {
+      setShowHourly(i);
+    }
+  };
+
   return (
     <>
-      <div className="flex gap-5 text-center flex-wrap">
+      <div className="flex gap-5 text-center flex-wrap z-20 relative">
         {weatherData.daily.time.map((w, i) => {
           return (
             <button
-              className="hover:bg-neutral-500 p-1 rounded-lg cursor-pointer"
-              onClick={handleDayClick}
+              key={i}
+              className="hover:bg-neutral-500 p-1 rounded-lg cursor-pointer transition duration-300"
+              onClick={() => handleDayClick(i)}
             >
               <WeatherIcon
                 key={days[(today + i) % 7]}
@@ -100,20 +110,36 @@ export function WeatherButton({ weatherData, iconImage, ...props }) {
           );
         })}
       </div>
-      {showHourly && (
-        <div className="flex gap-5 text-center mt-2 bg-neutral-700 rounded-lg px-2 py-3 overflow-x-auto custom-scrollbar">
-          {weatherData.hourly.time.slice(0, 24).map((w, i) => {
-            return (
-              <div>
-                <WeatherIcon
-                  title={formatTime(weatherData.hourly.time[i])}
-                  icon={iconImage[weatherData.hourly.weather_code[i]].day.image}
-                  mini={true}
-                  temps={[weatherData.hourly.temperature_2m[i]]}
-                />
-              </div>
-            );
-          })}
+      {showHourly != null && (
+        <div className="flex gap-5 text-center mt-2 bg-neutral-700 rounded-lg px-2 py-3 overflow-x-auto custom-scrollbar animate-fade-down z-10 relative">
+          {weatherData.hourly.time
+            .slice(showHourly * 24, (showHourly + 1) * 24)
+            .map((w, i) => {
+              const hour = new Date(
+                weatherData.hourly.time[showHourly * 24 + i]
+              ).getHours();
+              const icon = isNight(hour)
+                ? iconImage[
+                    weatherData.hourly.weather_code[showHourly * 24 + i]
+                  ].night.image
+                : iconImage[
+                    weatherData.hourly.weather_code[showHourly * 24 + i]
+                  ].day.image;
+              return (
+                <div key={i}>
+                  <WeatherIcon
+                    title={formatTime(
+                      weatherData.hourly.time[showHourly * 24 + i]
+                    )}
+                    icon={icon}
+                    mini={true}
+                    temps={[
+                      weatherData.hourly.temperature_2m[showHourly * 24 + i],
+                    ]}
+                  />
+                </div>
+              );
+            })}
         </div>
       )}
     </>

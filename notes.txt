@@ -1,0 +1,3 @@
+mover api iconos a weathericon
+filtro con api de ciudades latitud y longitud
+animación deplegable
