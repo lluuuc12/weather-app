@@ -50,14 +50,25 @@ function App() {
       <header className="mt-5 p-3 text-center">
         <h1 className="text-5xl font-bold text-white">Weather App</h1>
       </header>
-      <div className="flex justify-center my-4">
+      <div className="columns-1">
         <input
-          className="text-black p-2 border rounded"
+          className="text-black p-2 border rounded mb-4"
           type="text"
           value={inputValue}
           onChange={handleInputChange}
           placeholder="Enter city name"
         />
+        {inputValue ? (
+          <div>
+            {cityData.map((c, i) => {
+              return (
+                <div>
+                  <p>{cityData[i].display_name}</p>
+                </div>
+              );
+            })}
+          </div>
+        ) : null}
       </div>
       <div className="p-4 m-3 grid lg:grid-cols-2 grid-cols-1 gap-3">
         {data.cities.map((c) => {

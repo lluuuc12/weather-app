@@ -1,6 +1,7 @@
 export function WeatherIcon({
   title,
   icon,
+  description,
   mini = false,
   temps,
   unit = 'ºC',
@@ -11,9 +12,9 @@ export function WeatherIcon({
       <p>{title}</p>
       <div className="flex justify-center">
         {mini ? (
-          <img src={icon} alt={title} title="title" />
+          <img src={icon} alt={title} title={description} />
         ) : (
-          <img src={icon} alt={title} title="title" />
+          <img src={icon} alt={title} title={description} />
         )}
       </div>
       <div className="gap-1 flex justify-center">
