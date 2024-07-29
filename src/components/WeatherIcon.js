@@ -10,7 +10,11 @@ export function WeatherIcon({
     <>
       <p>{title}</p>
       <div className="flex justify-center">
-        {mini ? <img src={icon} alt={title} /> : <img src={icon} alt={title} />}
+        {mini ? (
+          <img src={icon} alt={title} title="title" />
+        ) : (
+          <img src={icon} alt={title} title="title" />
+        )}
       </div>
       <div className="gap-1 flex justify-center">
         {temps.map((e) => (

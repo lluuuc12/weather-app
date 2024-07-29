@@ -1,4 +1,9 @@
-mover api iconos a weathericon
-filtro con api de ciudades latitud y longitud
+HECHO
 animación deplegable
+
+HACIENDO
+filtro con api de ciudades latitud y longitud
+
+
+POR HACER
 tooltip image

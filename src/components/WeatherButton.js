@@ -130,7 +130,7 @@ export function WeatherButton({ weatherData, iconImage, ...props }) {
                     weatherData.hourly.weather_code[showHourly * 24 + i]
                   ].day.image;
               return (
-                <div key={i} className="">
+                <div key={i}>
                   <WeatherIcon
                     title={formatTime(
                       weatherData.hourly.time[showHourly * 24 + i]
