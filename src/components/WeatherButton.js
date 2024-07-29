@@ -63,15 +63,12 @@ import { useState } from 'react';
 </button>
 */
 
-export function WeatherButton({
-  days,
-  today,
-  weatherData,
-  iconImage,
-
-  ...props
-}) {
+export function WeatherButton({ weatherData, iconImage, ...props }) {
   const [showHourly, setShowHourly] = useState(false);
+
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const d = new Date();
+  let today = d.getDay();
 
   const formatTime = (timeString) => {
     const date = new Date(timeString);
@@ -103,20 +100,22 @@ export function WeatherButton({
           );
         })}
       </div>
-      <div className="flex gap-5 text-center mt-2 bg-neutral-700 rounded-lg px-2 py-3 overflow-x-auto custom-scrollbar">
-        {weatherData.hourly.time.slice(0, 24).map((w, i) => {
-          return (
-            <div>
-              <WeatherIcon
-                title={formatTime(weatherData.hourly.time[i])}
-                icon={iconImage[weatherData.hourly.weather_code[i]].day.image}
-                mini={true}
-                temps={[weatherData.hourly.temperature_2m[i]]}
-              />
-            </div>
-          );
-        })}
-      </div>
+      {showHourly && (
+        <div className="flex gap-5 text-center mt-2 bg-neutral-700 rounded-lg px-2 py-3 overflow-x-auto custom-scrollbar">
+          {weatherData.hourly.time.slice(0, 24).map((w, i) => {
+            return (
+              <div>
+                <WeatherIcon
+                  title={formatTime(weatherData.hourly.time[i])}
+                  icon={iconImage[weatherData.hourly.weather_code[i]].day.image}
+                  mini={true}
+                  temps={[weatherData.hourly.temperature_2m[i]]}
+                />
+              </div>
+            );
+          })}
+        </div>
+      )}
     </>
   );
 }

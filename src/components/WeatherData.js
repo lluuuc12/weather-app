@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { WeatherIcon } from './WeatherIcon';
 import { WeatherButton } from './WeatherButton';
 
 export function WeatherData({ city, iconImage, ...props }) {
@@ -20,16 +19,7 @@ export function WeatherData({ city, iconImage, ...props }) {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
-
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const d = new Date();
-  let day = d.getDay();
-
-  const formatTime = (timeString) => {
-    const date = new Date(timeString);
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  };
+  }, [city.lat, city.long]);
 
   return (
     <div className="bg-neutral-800 p-4 rounded-2xl">
@@ -41,12 +31,7 @@ export function WeatherData({ city, iconImage, ...props }) {
           : null}
       </h1>
       {weatherData ? (
-        <WeatherButton
-          days={days}
-          day={day}
-          weatherData={weatherData}
-          iconImage={iconImage}
-        />
+        <WeatherButton weatherData={weatherData} iconImage={iconImage} />
       ) : null}
     </div>
   );
