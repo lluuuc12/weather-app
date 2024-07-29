@@ -8,6 +8,7 @@ function App() {
   const urlCodeIcons =
     'https://gist.githubusercontent.com/stellasphere/9490c195ed2b53c707087c8c2db4ec0c/raw/76b0cb0ef0bfd8a2ec988aa54e30ecd1b483495d/descriptions.json';
   const [iconImage, setIconImage] = useState(null);
+
   useEffect(() => {
     // fetch weatherIcons
     axios
@@ -20,6 +21,7 @@ function App() {
         console.error(error);
       });
   }, []);
+
   return (
     <>
       <header className="mt-5 p-3 text-center">

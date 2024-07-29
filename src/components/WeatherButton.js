@@ -110,9 +110,13 @@ export function WeatherButton({ weatherData, iconImage, ...props }) {
           );
         })}
       </div>
-      {showHourly != null && (
-        <div className="flex gap-5 text-center mt-2 bg-neutral-700 rounded-lg px-2 py-3 overflow-x-auto custom-scrollbar animate-fade-down z-10 relative">
-          {weatherData.hourly.time
+      <div
+        className={`flex gap-5 text-center mt-2 bg-neutral-700 rounded-lg w-full ${
+          showHourly == null ? 'max-h-0' : 'px-2 py-3 max-h-full'
+        } overflow-x-auto overflow-y-hidden custom-scrollbar transition-all animate-fade-down z-10 relative duration-500`}
+      >
+        {showHourly != null &&
+          weatherData.hourly.time
             .slice(showHourly * 24, (showHourly + 1) * 24)
             .map((w, i) => {
               const hour = new Date(
@@ -126,7 +130,7 @@ export function WeatherButton({ weatherData, iconImage, ...props }) {
                     weatherData.hourly.weather_code[showHourly * 24 + i]
                   ].day.image;
               return (
-                <div key={i}>
+                <div key={i} className="">
                   <WeatherIcon
                     title={formatTime(
                       weatherData.hourly.time[showHourly * 24 + i]
@@ -140,8 +144,7 @@ export function WeatherButton({ weatherData, iconImage, ...props }) {
                 </div>
               );
             })}
-        </div>
-      )}
+      </div>
     </>
   );
 }
