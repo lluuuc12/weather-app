@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { WeatherButton } from './WeatherButton';
+import { WeatherHourlyButton } from './WeatherHourlyButton';
 
 export function WeatherData({ city, iconImage, ...props }) {
   const urlApiWeather = 'https://api.open-meteo.com/v1/forecast';
@@ -31,7 +31,7 @@ export function WeatherData({ city, iconImage, ...props }) {
           : null}
       </h1>
       {weatherData ? (
-        <WeatherButton weatherData={weatherData} iconImage={iconImage} />
+        <WeatherHourlyButton weatherData={weatherData} iconImage={iconImage} />
       ) : null}
     </div>
   );

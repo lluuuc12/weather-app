@@ -1,7 +1,7 @@
 import { WeatherIcon } from './WeatherIcon';
 import { useState } from 'react';
 
-export function WeatherButton({ weatherData, iconImage, ...props }) {
+export function WeatherHourlyButton({ weatherData, iconImage, ...props }) {
   const [showHourly, setShowHourly] = useState(null);
 
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
