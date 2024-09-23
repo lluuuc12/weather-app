@@ -1,4 +1,5 @@
 import axios from 'axios';
+import data from '../cities.json';
 import { useState, useEffect } from 'react';
 
 export function WeatherSearchButton({ ...props }) {
@@ -35,6 +36,8 @@ export function WeatherSearchButton({ ...props }) {
       lon: cityData[i].lon,
     };
     console.log(city);
+    data.cities.push(city);
+    console.log(data.cities);
   };
 
   useEffect(() => {
